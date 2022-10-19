@@ -1,26 +1,38 @@
 package polymorphism;
 
-public class SamsungTV implements TV {
+public class SamsungTV implements TV{
 	
-	public void initMethod() {
-		System.out.println("객체 초기화 작업 처리");
+	private Speaker speaker;
+	int price;
+
+	public SamsungTV() {
+		System.out.println("Samsung TV (1) 객체 생성");
 	}
 	
-	public void destoryMethod() {
-		System.out.println("객체 삭제 전에 처리할 로직 작업 처리");
+	public void setSpeaker(Speaker speaker) {
+		System.out.println("===> setSpeaker() 호출");
+		this.speaker = speaker;
 	}
-	
+
+	public void setPrice(int price) {
+		System.out.println("===> setPrice() 호출");
+		this.price = price;
+	}
+
+	@Override
 	public void powerOn() {
-		System.out.println("SamsungTV 전원 켜!!!!!!!!");
-	}
+		System.out.println("Samsung TV를 켠다. (가격 : " + price + ")");
+	} 
+	@Override
 	public void powerOff() {
-		System.out.println("SamsungTV 전원 꺼!!!!!!!!");
-	}
+		System.out.println("Samsung TV를 끈다");
+	} 
+	@Override
 	public void volumeUp() {
-		System.out.println("SamsungTV 소리 올려!!!!!!!!");
-	}
+		speaker.volumeUp();
+	} 
+	@Override
 	public void volumeDown() {
-		System.out.println("SamsungTV 소리 내려!!!!!!!!");
+		speaker.volumeDown();
 	}
-	
 }

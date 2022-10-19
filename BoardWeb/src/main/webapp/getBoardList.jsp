@@ -4,9 +4,7 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 
 <%
-   BoardVO vo = new BoardVO();
-   BoardDAO boardDAO = new BoardDAO();
-   List<BoardVO> boardList = boardDAO.getBoardList(vo);
+   List<BoardVO> boardList = (List) session.getAttribute("boardList");
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -20,33 +18,34 @@
         html, body, div, span, h1, h2, h3, p, a,  input, select, option, table, tr, th, td,search,input {
       margin: 0;padding: 0;border: 0;box-sizing: border-box; color: #333; texdt-decoration: none;}
         .wrap{max-width: 1000px; margin: 0 auto; padding: 50px;}
-        .tit{text-align: center; font-size: 30px; font-weight: bold; background-color: pink; padding: 50px 0; } 
+        .tit{text-align: center; font-size: 30px; font-weight: bold; background-color: #eefaff; padding: 50px 0; } 
         .sub_tit{text-align: center; margin-bottom: 30px; margin-top: 20px;}
-        .sub_tit a{color: #fff; background-color: pink; padding: 5px 20px; display: inline-block; text-decoration: none; border-radius: 20px;}
-        .sub_tit a:hover{background-color: #888;}
-        .sub_tit strong{font-weight: bold; font-size: 24px;}
+        .sub_tit a{color: #fff; background-color: #5e92c6; padding: 5px 20px; display: inline-block; text-decoration: none; border-radius: 20px;}
+        .sub_tit a:hover{text-decoration: underline; background-color: #5282b2;}
+        .sub_tit strong{font-weight: bold; color: #6ba1d8;}
         
         .board_table{width: 100%; border-collapse: collapse; text-align: center;}
         .b_list th, .b_list td{height: 50px; line-height: 50px;}
         .b_list tr{border-bottom: 1px solid #eaeaea; background-color: #fafafa;}
-        .board_table .b_tit{background-color: #fff; border-top: 3px solid pink; border-bottom: 1px solid #ccc;  }
+        .board_table .b_tit{background-color: #fff; border-top: 3px solid #6ba1d8; border-bottom: 1px solid #ccc;  }
         .b_search{margin: 20px auto; width: 400px; height: 40px; border: none;}
         .b_search *{height: 40px; border-radius: 10px;}
         .b_search select{width: 90px; transform: translateY(-2px); border: 1px solid #ccc;}
         .b_search input:nth-of-type(1){background-color: #fafafa; border: 1px solid #ccc;}
-        .b_search input:nth-of-type(2){width: 80px; cursor: pointer; background-color: pink; color: #fff;}
-        .b_search input:nth-of-type(2):hover{background-color: #888;}
-        .newWrite a{display: block; width: 100%; height: 40px; line-height: 40px;  text-align: center; background-color: pink; color: #111; margin-top: 20px; text-decoration: none;}
-        .newWrite a:hover{background-color: #888;}
+        .b_search input:nth-of-type(2){width: 80px; cursor: pointer; background-color: #454040; color: #fff;}
+        .b_search input:nth-of-type(2):hover{background-color: #6c5e5e;}
+        .newWrite a{display: block; width: 100%; height: 40px; line-height: 40px;  text-align: center; background-color: #b7d5f4; color: #111; margin-top: 20px; text-decoration: none;}
+        .newWrite a:hover{background-color: #ffd66a;}
     </style>
 </head>
 <body>
    <div class="wrap">
-    <h1 class="tit">HELL SPRING</h1>
-    <h3 class="sub_tit"><strong>현정</strong>님 환영합니다.  <a href="logout_proc.jsp">Log-out</a></h3>
+    <h1 class="tit">글 목록</h1>
+    <h3 class="sub_tit"><strong>제현정</strong>님 환영합니다.  <a href="logout.do">Log-out</a></h3>
     
 <!--    검색 시작-->
-<form action="getBoardList.jsp" method="post">
+<!-- <form action="getBoardList.jsp" method="post"> -->
+<form action="getBoardList.do" method="post">
     <table class="board_table b_search">
        <tr>
            <td>
@@ -73,7 +72,7 @@
         <% for(BoardVO board : boardList) { %>
         <tr>
             <td><%= board.getSeq() %></td>
-            <td><a href="getBoard.jsp?seq=<%= board.getSeq() %>">
+            <td><a href="getBoard.do?seq=<%= board.getSeq() %>">
                 <%= board.getTitle() %></a></td>
             <td><%= board.getWriter() %></td>
             <td><%= board.getRegDate() %></td>
